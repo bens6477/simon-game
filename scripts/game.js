@@ -4,8 +4,7 @@ let game = {
     playerMoves: [],
     turnNumber: 0,
     choices: ["button1", "button2", "button3", "button4"],
-
-}
+};
 
 function newGame() {
     game.score = 0;
@@ -20,8 +19,8 @@ function newGame() {
                 playerTurn();
             });
             circle.setAttribute("data-listener", "true");
-        }
-    }
+        };
+    };
     showScore();
     addTurn();
 };
@@ -51,9 +50,22 @@ function showTurns() {
         game.turnNumber++;
         if (game.turnNumber >= game.currentGame.length) {
             clearInterval(turns);
-        }
+        };
     }, 800);
 };
 
+function playerTurn() {
+    let i = game.playerMoves.length - 1;
+    if (game.currentGame[i] === game.playerMoves[i]) {
+        if (game.currentGame.length == game.playerMoves.length) {
+            game.score ++;
+            showScore();
+            addTurn();
+        };
+    } else {
+        alert("Wrong move!");
+        newGame();
+    };
+};
 
-module.exports = { game, newGame, showScore, addTurn, lightsOn, showTurns };
+module.exports = { game, newGame, showScore, addTurn, lightsOn, showTurns, playerTurn };
